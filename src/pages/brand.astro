@@ -1,0 +1,333 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout>
+  <main class="brand-page">
+    <header class="brand-header">
+      <div class="container">
+        <h1>ATOM Brand Guidelines</h1>
+        <p>Logo system and typography standards</p>
+      </div>
+    </header>
+
+    <div class="container sections">
+      <section>
+        <h2>Logo Usage</h2>
+        <div class="logo-grid">
+          <article class="logo-card">
+            <div class="logo-demo light-bg">
+              <img src="/atom-logo-wordmark.jpg" alt="ATOM Wordmark" class="wordmark" />
+            </div>
+            <h3>Primary Wordmark</h3>
+            <p>Use on light backgrounds for maximum visibility.</p>
+            <a class="download-btn" href="/atom-logo-wordmark.jpg" download="atom-logo-wordmark.jpg">Download JPG</a>
+          </article>
+
+          <article class="logo-card">
+            <div class="logo-demo light-bg">
+              <img src="/atom-logo-dark.png" alt="ATOM Symbol Dark" class="symbol" />
+            </div>
+            <h3>Symbol (Dark)</h3>
+            <p>Use for app icons and compact spaces.</p>
+            <a class="download-btn" href="/atom-logo-dark.png" download="atom-logo-dark.png">Download PNG</a>
+          </article>
+
+          <article class="logo-card">
+            <div class="logo-demo dark-bg">
+              <img src="/atom-logo-light.png" alt="ATOM Symbol Light" class="symbol" />
+            </div>
+            <h3>Symbol (Light)</h3>
+            <p>Use on dark backgrounds only.</p>
+            <a class="download-btn" href="/atom-logo-light.png" download="atom-logo-light.png">Download PNG</a>
+          </article>
+        </div>
+
+        <article class="note">
+          <h3>Clear Space</h3>
+          <p>
+            Maintain a minimum clear space around the logo equal to the height of the "A" character.
+            Do not stretch, rotate, recolor, or add visual effects to the mark.
+          </p>
+        </article>
+      </section>
+
+      <section>
+        <h2>Typography</h2>
+
+        <div class="type-grid">
+          <article class="type-card">
+            <div class="type-meta"><span>Display / H1</span><span>IBM Plex Sans</span></div>
+            <p class="sample display">Aa Bb Cc</p>
+            <p class="sample sentence">The quick brown fox jumps over the lazy dog</p>
+            <p class="type-note">Use for hero headlines and key section titles. Weight 700.</p>
+          </article>
+
+          <article class="type-card">
+            <div class="type-meta"><span>Headings / H2-H3</span><span>IBM Plex Sans</span></div>
+            <p class="sample heading">Aa Bb Cc</p>
+            <p class="sample sentence">The quick brown fox jumps over the lazy dog</p>
+            <p class="type-note">Use for section headings and subheadings. Weight 600.</p>
+          </article>
+
+          <article class="type-card">
+            <div class="type-meta"><span>Body Text</span><span>Inter</span></div>
+            <p class="sample body-large">Aa Bb Cc</p>
+            <p class="sample body">The quick brown fox jumps over the lazy dog. Use this style for paragraphs and descriptive content.</p>
+            <p class="type-note">Use for body copy. Weight 400, emphasis at 500.</p>
+          </article>
+
+          <article class="type-card">
+            <div class="type-meta"><span>Accent</span><span>Space Grotesk</span></div>
+            <p class="sample accent">Aa Bb Cc</p>
+            <p class="sample accent-line">1234567890 - AI - CHATBOT - ENTERPRISE</p>
+            <p class="type-note">Use for labels, navigation, and CTA elements.</p>
+          </article>
+        </div>
+
+        <article class="scale-card">
+          <h3>Type Scale</h3>
+          <div class="scale-row"><span>H1</span><strong class="h1">Display Heading</strong></div>
+          <div class="scale-row"><span>H2</span><strong class="h2">Section Heading</strong></div>
+          <div class="scale-row"><span>H3</span><strong class="h3">Subsection Heading</strong></div>
+          <div class="scale-row"><span>Body</span><span class="b">Body text for paragraphs and content</span></div>
+          <div class="scale-row no-border"><span>Caption</span><span class="c">Labels, buttons, and navigation</span></div>
+        </article>
+      </section>
+
+      <footer class="brand-footer">
+        <div>
+          <img src="/atom-logo-wordmark.jpg" alt="ATOM" />
+          <p>© 2025 ATOM. All rights reserved.</p>
+        </div>
+        <p>Brand Guidelines v1.0</p>
+      </footer>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  :global(body) {
+    margin: 0;
+    font-family: "Inter", "Segoe UI", sans-serif;
+    background: #0f1013;
+    color: #e9e9e9;
+  }
+
+  .brand-page {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 12%, rgba(137, 0, 176, 0.18), transparent 34%),
+      radial-gradient(circle at 80% 78%, rgba(137, 0, 176, 0.12), transparent 34%),
+      #0f1013;
+  }
+
+  .brand-header {
+    border-bottom: 1px solid rgba(233, 233, 233, 0.13);
+    background: rgba(24, 24, 24, 0.75);
+  }
+
+  .container {
+    width: min(1140px, calc(100% - 2rem));
+    margin: 0 auto;
+  }
+
+  .brand-header .container {
+    padding: 2.5rem 0;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    font-weight: 700;
+  }
+
+  .brand-header p {
+    margin: 0.45rem 0 0;
+    color: #b7b7b7;
+    font-size: 1.05rem;
+  }
+
+  .sections {
+    padding: 2.8rem 0 4.4rem;
+    display: grid;
+    gap: 3.6rem;
+  }
+
+  section h2 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+  }
+
+  .logo-grid,
+  .type-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .logo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .logo-card,
+  .type-card,
+  .scale-card,
+  .note {
+    border: 1px solid rgba(233, 233, 233, 0.14);
+    border-radius: 12px;
+    background: rgba(24, 24, 24, 0.8);
+  }
+
+  .logo-card {
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .logo-demo {
+    border-radius: 10px;
+    min-height: 150px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 0.9rem;
+    padding: 1rem;
+  }
+
+  .light-bg { background: #fff; }
+  .dark-bg { background: #181818; }
+
+  .wordmark { max-height: 64px; width: auto; }
+  .symbol { max-height: 90px; width: auto; }
+
+  .logo-card h3 { margin: 0; }
+
+  .logo-card p {
+    margin: 0.45rem 0 0.8rem;
+    color: #b7b7b7;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .download-btn {
+    text-decoration: none;
+    border: 1px solid rgba(233, 233, 233, 0.3);
+    border-radius: 8px;
+    padding: 0.35rem 0.65rem;
+    color: #e9e9e9;
+    font-size: 0.78rem;
+    display: inline-block;
+  }
+
+  .download-btn:hover {
+    border-color: #8900b0;
+    color: #d687ef;
+  }
+
+  .note {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(233, 233, 233, 0.04);
+  }
+
+  .note h3 { margin: 0; }
+
+  .note p {
+    margin: 0.45rem 0 0;
+    color: #bbbbbb;
+    line-height: 1.6;
+  }
+
+  .type-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .type-card { padding: 1rem; }
+
+  .type-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #9f9f9f;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .sample { margin: 0.8rem 0 0; }
+  .display { font: 700 3rem/1.04 "IBM Plex Sans", sans-serif; }
+  .heading { font: 600 2rem/1.04 "IBM Plex Sans", sans-serif; }
+  .body-large { font-size: 2rem; }
+  .body { line-height: 1.62; }
+  .accent { font: 500 2rem/1.05 "Space Grotesk", "IBM Plex Sans", sans-serif; }
+  .accent-line { font: 500 1rem/1.4 "Space Grotesk", "IBM Plex Sans", sans-serif; }
+  .sentence { font-size: 1.3rem; }
+
+  .type-note {
+    margin: 0.8rem 0 0;
+    padding-top: 0.8rem;
+    border-top: 1px solid rgba(233, 233, 233, 0.11);
+    color: #b7b7b7;
+    line-height: 1.5;
+    font-size: 0.9rem;
+  }
+
+  .scale-card {
+    margin-top: 1rem;
+    padding: 1rem;
+  }
+
+  .scale-card h3 { margin: 0 0 1rem; }
+
+  .scale-row {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.68rem 0;
+    border-bottom: 1px solid rgba(233, 233, 233, 0.11);
+  }
+
+  .scale-row.no-border { border-bottom: 0; }
+
+  .scale-row > span:first-child {
+    width: 70px;
+    color: #a0a0a0;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .h1 { font: 700 2.2rem/1.04 "IBM Plex Sans", sans-serif; }
+  .h2 { font: 600 1.8rem/1.08 "IBM Plex Sans", sans-serif; }
+  .h3 { font: 600 1.4rem/1.1 "IBM Plex Sans", sans-serif; }
+  .b { font-size: 1rem; }
+  .c { color: #a8a8a8; font-size: 0.88rem; }
+
+  .brand-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(233, 233, 233, 0.14);
+    padding-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .brand-footer img {
+    height: 32px;
+    width: auto;
+    border-radius: 4px;
+    background: #fff;
+    display: block;
+  }
+
+  .brand-footer p {
+    margin: 0.4rem 0 0;
+    color: #a8a8a8;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 1040px) {
+    .logo-grid,
+    .type-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

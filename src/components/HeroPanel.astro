@@ -1,0 +1,607 @@
+---
+import Layout from '../layouts/Layout.astro';
+// Homepage.astro
+---
+<Layout>
+<div class="container">
+        <!-- Red neuronal de fondo -->
+        <div class="neural-background">
+            <!-- Nodos lado izquierdo -->
+            <div class="node" style="top: 10%; left: 15%;"></div>
+            <div class="node" style="top: 25%; left: 8%;"></div>
+            <div class="node" style="top: 40%; left: 20%;"></div>
+            <div class="node" style="top: 60%; left: 12%;"></div>
+            <div class="node" style="top: 75%; left: 18%;"></div>
+            <div class="node" style="top: 85%; left: 25%;"></div>
+            <div class="node" style="top: 18%; left: 5%;"></div>
+            <div class="node" style="top: 50%; left: 15%;"></div>
+            <div class="node" style="top: 68%; left: 22%;"></div>
+            <div class="node" style="top: 35%; left: 10%;"></div>
+            
+            <!-- Nodos lado derecho -->
+            <div class="node" style="top: 12%; right: 20%;"></div>
+            <div class="node" style="top: 30%; right: 15%;"></div>
+            <div class="node" style="top: 45%; right: 8%;"></div>
+            <div class="node" style="top: 55%; right: 22%;"></div>
+            <div class="node" style="top: 70%; right: 10%;"></div>
+            <div class="node" style="top: 88%; right: 18%;"></div>
+            <div class="node" style="top: 20%; right: 12%;"></div>
+            <div class="node" style="top: 62%; right: 25%;"></div>
+            <div class="node" style="top: 78%; right: 15%;"></div>
+            <div class="node" style="top: 38%; right: 18%;"></div>
+            
+            <!-- Nodos centrales -->
+            <div class="node" style="top: 8%; left: 50%;"></div>
+            <div class="node" style="bottom: 15%; left: 45%;"></div>
+            <div class="node" style="top: 28%; left: 48%;"></div>
+            <div class="node" style="top: 72%; left: 52%;"></div>
+            <div class="node" style="top: 15%; left: 42%;"></div>
+            <div class="node" style="bottom: 25%; left: 55%;"></div>
+            
+            <!-- Conexiones lado izquierdo -->
+            <div class="connection" style="top: 10%; left: 15%; width: 150px; transform: rotate(45deg);"></div>
+            <div class="connection" style="top: 25%; left: 8%; width: 180px; transform: rotate(-30deg);"></div>
+            <div class="connection" style="top: 40%; left: 20%; width: 200px; transform: rotate(15deg);"></div>
+            <div class="connection" style="top: 18%; left: 5%; width: 160px; transform: rotate(60deg);"></div>
+            <div class="connection" style="top: 60%; left: 12%; width: 140px; transform: rotate(-45deg);"></div>
+            <div class="connection" style="top: 35%; left: 10%; width: 170px; transform: rotate(25deg);"></div>
+            <div class="connection" style="top: 75%; left: 18%; width: 130px; transform: rotate(-20deg);"></div>
+            
+            <!-- Conexiones lado derecho -->
+            <div class="connection" style="top: 12%; right: 20%; width: 120px; transform: rotate(-60deg);"></div>
+            <div class="connection" style="top: 45%; right: 8%; width: 160px; transform: rotate(120deg);"></div>
+            <div class="connection" style="top: 30%; right: 15%; width: 145px; transform: rotate(-40deg);"></div>
+            <div class="connection" style="top: 70%; right: 10%; width: 155px; transform: rotate(35deg);"></div>
+            <div class="connection" style="top: 55%; right: 22%; width: 135px; transform: rotate(-75deg);"></div>
+            <div class="connection" style="top: 38%; right: 18%; width: 125px; transform: rotate(50deg);"></div>
+            
+            <!-- Conexiones centrales -->
+            <div class="connection" style="top: 8%; left: 50%; width: 200px; transform: rotate(-15deg);"></div>
+            <div class="connection" style="top: 28%; left: 48%; width: 180px; transform: rotate(30deg);"></div>
+            <div class="connection" style="bottom: 15%; left: 45%; width: 190px; transform: rotate(-50deg);"></div>
+            <div class="connection" style="top: 72%; left: 52%; width: 165px; transform: rotate(70deg);"></div>
+        </div>
+        
+        <div class="glass-panel">
+            <!-- Logo en esquina superior izquierda -->
+            <div class="logo-container" id="logoButton">
+                <img src="/atom-logo.png" alt="ATOM Logo">
+            </div>
+            <div class="logo-hint" id="logoHint" aria-hidden="true">⟵ O pulse aquí para más opciones</div>
+
+            <!-- Menú de navegación -->
+            <nav class="nav-menu" id="navMenu">
+                <a href="/features">Features</a>
+                <a href="/pricing">Pricing</a>
+            </nav>
+
+            <section class="voice-stage" aria-label="Robot speaking area">
+                <div class="waves-container" aria-hidden="true">
+                    <svg viewBox="0 0 1200 140" preserveAspectRatio="none">
+                        <path id="wave1" class="wave-line wave1" d=""></path>
+                        <path id="wave2" class="wave-line wave2" d=""></path>
+                        <path id="wave3" class="wave-line wave3" d=""></path>
+                        <path id="wave4" class="wave-line wave4" d=""></path>
+                        <path id="wave5" class="wave-line wave5" d=""></path>
+                    </svg>
+                </div>
+                <p class="voice-text" id="robotSpeechText"></p>
+                <p class="voice-text voice-text-secondary" id="robotSpeechTextSecondary"></p>
+                <a class="discover-button" id="discoverButton" href="/features">Descubre más</a>
+            </section>
+
+            <!-- Efecto ATOM en la esquina inferior derecha -->
+
+        </div>
+    </div>
+    </Layout>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: white;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+        }
+
+        /* Red neuronal de fondo */
+        .neural-background {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .node {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #8900B0;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #8900B0;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.7; }
+        }
+
+        .connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #8900B0, transparent);
+            transform-origin: left center;
+            opacity: 0.4;
+        }
+
+        /* Panel de cristal 3D */
+        .glass-panel {
+            position: relative;
+            width: 85%;
+            max-width: 1400px;
+            height: 75vh;
+            background: rgba(40, 40, 40, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transform: perspective(1200px) rotateY(-15deg) rotateX(5deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Logo en la esquina superior izquierda */
+        .logo-container {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 30;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(137, 0, 176, 0.6));
+        }
+
+        .logo-container img {
+            width: 80px;
+            height: auto;
+            display: block;
+        }
+
+        .logo-hint {
+            position: absolute;
+            top: 70px;
+            left: 120px;
+            transform: translateY(-50%);
+            z-index: 30;
+            color: #f2e7ff;
+            font-size: 0.95rem;
+            font-weight: 500;
+            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+            letter-spacing: 0.01em;
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+
+        .logo-hint.visible {
+            opacity: 1;
+        }
+
+        /* Menú de navegación */
+        .nav-menu {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
+            z-index: 30;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .nav-menu a {
+            color: #E9E9E9;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px 25px;
+            border: 1px solid rgba(137, 0, 176, 0.5);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(137, 0, 176, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-menu a:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu a:hover {
+            border-color: #8900B0;
+            box-shadow: 0 0 20px rgba(137, 0, 176, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .voice-stage {
+            position: absolute;
+            left: 5%;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-40%);
+            z-index: 22;
+            display: grid;
+            justify-items: center;
+            gap: 10px;
+            pointer-events: none;
+        }
+
+        .waves-container {
+            width: min(92%, 1180px);
+            height: 180px;
+            z-index: 1;
+            position: relative;
+            opacity: 0.95;
+            grid-column: 1;
+            grid-row: 1;
+            align-self: center;
+        }
+
+        .waves-container svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .wave-line {
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0 0 8px rgba(184, 112, 255, 0.22));
+        }
+
+        .wave1 { stroke: #8900B0; stroke-width: 3.2; opacity: 0.35; }
+        .wave2 { stroke: #a855f7; stroke-width: 2.6; opacity: 0.46; }
+        .wave3 { stroke: #8900B0; stroke-width: 3.8; opacity: 0.62; }
+        .wave4 { stroke: #c084fc; stroke-width: 2.1; opacity: 0.5; }
+        .wave5 { stroke: #d946ef; stroke-width: 3.3; opacity: 0.58; }
+
+        .voice-stage.speaking .wave-line {
+            filter: drop-shadow(0 0 11px rgba(200, 136, 255, 0.35));
+        }
+
+        .voice-text {
+            margin: 10px 0 0;
+            min-height: 44px;
+            max-width: min(78%, 920px);
+            text-align: center;
+            white-space: pre-line;
+            color: #f2e7ff;
+            font-size: clamp(1rem, 1.65vw, 1.33rem);
+            font-weight: 500;
+            line-height: 1.45;
+            text-shadow: 0 4px 22px rgba(0, 0, 0, 0.45);
+        }
+
+        .voice-text-secondary {
+            display: none;
+            min-height: 0;
+            font-size: clamp(0.95rem, 1.35vw, 1.12rem);
+            color: #f6ecff;
+        }
+
+        .voice-text-secondary.visible {
+            display: block;
+            min-height: 30px;
+        }
+
+        .voice-text.caret-active::after {
+            content: "";
+            display: inline-block;
+            width: 2px;
+            height: 1.05em;
+            margin-left: 4px;
+            background: #ce9fff;
+            vertical-align: text-bottom;
+            animation: caretBlink 0.8s step-end infinite;
+        }
+
+        .discover-button {
+            margin-top: 14px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 22px;
+            border-radius: 10px;
+            border: 1px solid rgba(137, 0, 176, 0.72);
+            background: rgba(17, 10, 22, 0.72);
+            color: #f5ebff;
+            text-decoration: none;
+            font-size: 0.97rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+            pointer-events: auto;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            pointer-events: none;
+        }
+
+        .discover-button:hover {
+            transform: translateY(-2px);
+            border-color: #ce9fff;
+            box-shadow: 0 14px 28px rgba(100, 35, 135, 0.45);
+        }
+
+        .discover-button.visible {
+            display: inline-flex;
+            pointer-events: auto;
+        }
+
+        @keyframes caretBlink {
+            0%, 45% { opacity: 1; }
+            46%, 100% { opacity: 0; }
+        }
+
+        @media (max-width: 900px) {
+            .glass-panel {
+                transform: none;
+                width: 92%;
+                height: 82vh;
+            }
+
+            .voice-stage {
+                left: 16px;
+                right: 16px;
+                transform: translateY(-34%);
+                gap: 8px;
+            }
+
+            .logo-hint {
+                top: 58px;
+                left: 118px;
+                font-size: 0.8rem;
+                max-width: 58vw;
+            }
+
+            .waves-container {
+                width: 100%;
+                height: 120px;
+            }
+
+            .voice-text {
+                min-height: 42px;
+                max-width: 96%;
+            }
+
+            .voice-text-secondary {
+                min-height: 0;
+            }
+
+            .voice-text-secondary.visible {
+                min-height: 28px;
+            }
+        }
+    </style>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const logoButton = document.getElementById("logoButton");
+    const navMenu = document.getElementById("navMenu");
+    const voiceStage = document.querySelector(".voice-stage");
+    const speechText = document.getElementById("robotSpeechText");
+    const speechTextSecondary = document.getElementById("robotSpeechTextSecondary");
+    const discoverButton = document.getElementById("discoverButton");
+    const logoHint = document.getElementById("logoHint");
+    const waveIds = ["wave1", "wave2", "wave3", "wave4", "wave5"];
+    const wavePaths = waveIds
+      .map((id) => document.getElementById(id))
+      .filter((node) => node instanceof SVGPathElement);
+    let menuOpen = false;
+
+    // Guards: evita null
+    if (!(logoButton instanceof HTMLElement) || !(navMenu instanceof HTMLElement)) return;
+
+    logoButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // evita que el click burbujee al document y cierre el menú
+      menuOpen = !menuOpen;
+      navMenu.classList.toggle("active", menuOpen);
+    });
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener("click", (e) => {
+      const target = e.target;
+      if (!(target instanceof Node)) return;
+
+      if (!logoButton.contains(target) && !navMenu.contains(target)) {
+        menuOpen = false;
+        navMenu.classList.remove("active");
+      }
+    });
+
+    if (
+      !(speechText instanceof HTMLElement) ||
+      !(speechTextSecondary instanceof HTMLElement) ||
+      !(discoverButton instanceof HTMLElement) ||
+      !(logoHint instanceof HTMLElement) ||
+      !(voiceStage instanceof HTMLElement) ||
+      wavePaths.length !== waveIds.length
+    ) {
+      return;
+    }
+
+    speechText.textContent = "";
+    speechTextSecondary.textContent = "";
+    let speaking = false;
+    let destroyed = false;
+
+    const sleep = (ms) => new Promise((resolve) => {
+      window.setTimeout(resolve, ms);
+    });
+
+    const setSpeaking = (value) => {
+      speaking = value;
+      voiceStage.classList.toggle("speaking", value);
+    };
+
+    const typeMessage = async (element, message) => {
+      setSpeaking(true);
+      speechText.classList.remove("caret-active");
+      speechTextSecondary.classList.remove("caret-active");
+      element.classList.add("caret-active");
+      for (let i = 1; i <= message.length; i += 1) {
+        if (destroyed) return;
+        element.textContent = message.slice(0, i);
+        await sleep(32);
+      }
+      setSpeaking(false);
+    };
+
+    const eraseMessage = async (element) => {
+      setSpeaking(true);
+      speechText.classList.remove("caret-active");
+      speechTextSecondary.classList.remove("caret-active");
+      element.classList.add("caret-active");
+      const text = element.textContent ?? "";
+      for (let i = text.length; i >= 0; i -= 1) {
+        if (destroyed) return;
+        element.textContent = text.slice(0, i);
+        await sleep(18);
+      }
+      element.classList.remove("caret-active");
+      setSpeaking(false);
+    };
+
+    const runMessageSequence = async () => {
+      const firstMessage = "Hola soy Atom, estoy aquí para que recuperes ventas\ncada semana.";
+      const secondMessage = "Deja de perder oportunidades por falta de seguimiento: convierto tus contactos en citas y clientes con un proceso claro que funciona aunque tú estés ocupado.";
+      const thirdMessage = "Descubre más pulsando el boton siguiente.";
+
+      await typeMessage(speechText, firstMessage);
+      if (destroyed) return;
+      await sleep(2000);
+      await eraseMessage(speechText);
+      if (destroyed) return;
+
+      await typeMessage(speechText, secondMessage);
+      if (destroyed) return;
+      await sleep(2000);
+
+      speechTextSecondary.classList.add("visible");
+      await typeMessage(speechTextSecondary, thirdMessage);
+      if (destroyed) return;
+
+      speechText.classList.remove("caret-active");
+      speechTextSecondary.classList.add("caret-active");
+      discoverButton.classList.add("visible");
+      logoHint.classList.add("visible");
+    };
+
+    runMessageSequence();
+
+    const configs = [
+      { base: 70, amp: 11, speed: 0.054, freq: 1.7, phase: Math.random() * 6, jitter: 0.24 },
+      { base: 70, amp: 14, speed: 0.05, freq: 1.45, phase: Math.random() * 6, jitter: 0.28 },
+      { base: 70, amp: 17, speed: 0.046, freq: 1.62, phase: Math.random() * 6, jitter: 0.3 },
+      { base: 70, amp: 13, speed: 0.052, freq: 1.35, phase: Math.random() * 6, jitter: 0.26 },
+      { base: 70, amp: 15, speed: 0.048, freq: 1.78, phase: Math.random() * 6, jitter: 0.29 }
+    ];
+
+    const smoothLevels = new Array(configs.length).fill(0.3);
+    let burstEnergy = 0;
+    let tick = 0;
+
+    const createWavePath = (baseY, amplitude, frequency, phase, noise) => {
+      const points = [];
+      const step = 60;
+      for (let x = 0; x <= 1200; x += step) {
+        const t = x / 1200;
+        const sine =
+          Math.sin((t * Math.PI * 2 * frequency) + phase) +
+          0.45 * Math.sin((t * Math.PI * 2 * (frequency * 2.15)) + phase * 0.6);
+        const irregular = (Math.random() * 2 - 1) * noise;
+        const y = baseY + (sine * amplitude) + irregular;
+        points.push([x, y]);
+      }
+
+      let d = `M ${points[0][0].toFixed(1)},${points[0][1].toFixed(1)}`;
+      for (let i = 1; i < points.length - 1; i += 1) {
+        const xc = (points[i][0] + points[i + 1][0]) / 2;
+        const yc = (points[i][1] + points[i + 1][1]) / 2;
+        d += ` Q ${points[i][0].toFixed(1)},${points[i][1].toFixed(1)} ${xc.toFixed(1)},${yc.toFixed(1)}`;
+      }
+      return d;
+    };
+
+    const waveformTimer = window.setInterval(() => {
+      tick += 1;
+
+      if (speaking && Math.random() > 0.82) {
+        burstEnergy = 0.55 + Math.random() * 0.8;
+      } else if (!speaking && Math.random() > 0.97) {
+        burstEnergy = 0.12 + Math.random() * 0.24;
+      }
+      burstEnergy *= speaking ? 0.85 : 0.86;
+
+      for (let i = 0; i < wavePaths.length; i += 1) {
+        const cfg = configs[i];
+        const baseEnergy = speaking ? 0.5 : 0.16;
+        const randomEnergy = speaking ? Math.random() * 0.52 : Math.random() * 0.14;
+        const targetEnergy = Math.min(1.2, baseEnergy + randomEnergy + burstEnergy * (speaking ? 0.52 : 0.34));
+        smoothLevels[i] = smoothLevels[i] * 0.5 + targetEnergy * 0.5;
+
+        const amplitude = cfg.amp * smoothLevels[i];
+        const phase = cfg.phase + tick * cfg.speed + Math.sin(tick * 0.015 + i) * 0.22;
+        const frequency = cfg.freq + Math.sin(tick * 0.013 + i * 0.7) * 0.18;
+        const noise = cfg.jitter * (speaking ? 1 : 0.45);
+        const pathData = createWavePath(cfg.base, amplitude, frequency, phase, noise);
+        wavePaths[i].setAttribute("d", pathData);
+      }
+    }, 85);
+
+    window.addEventListener("beforeunload", () => {
+      destroyed = true;
+      window.clearInterval(waveformTimer);
+    });
+  });
+</script>
