@@ -1,0 +1,11 @@
+.git
+.gitignore
+.DS_Store
+.astro
+.vscode
+dist
+node_modules
+stylescape-studio/node_modules
+stylescape-studio/dist
+n8n
+README.md
