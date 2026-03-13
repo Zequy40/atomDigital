@@ -1,0 +1,172 @@
+{
+  "name": "ATOM Contact Form Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "690a2489-a509-48c3-8746-e3fc1668a510",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -940,
+        -120
+      ],
+      "id": "32325a2f-a206-4787-9d68-ea761f8746b1",
+      "name": "Webhook",
+      "webhookId": "690a2489-a509-48c3-8746-e3fc1668a510"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $json.body ?? $json;\nconst locale = body.locale === 'en' ? 'en' : 'es';\nconst nombre = body.nombre ?? body.Name ?? '';\nconst email = body.email ?? '';\nconst mensaje = body.mensaje ?? body.message ?? '';\n\nreturn [{\n  json: {\n    Nombre: nombre,\n    Email: email,\n    Mensaje: mensaje,\n    locale\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -700,
+        -120
+      ],
+      "id": "0de249e6-1227-4dcf-a964-f8e3f61961ca",
+      "name": "Normalize payload"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1jN7usKYVuc1vd6qidCxsYMmGiBYMI5ZRWm5eGwVCB7I",
+          "mode": "list",
+          "cachedResultName": "Contacto Leads",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jN7usKYVuc1vd6qidCxsYMmGiBYMI5ZRWm5eGwVCB7I/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 801945814,
+          "mode": "list",
+          "cachedResultName": "LEADS FORM",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jN7usKYVuc1vd6qidCxsYMmGiBYMI5ZRWm5eGwVCB7I/edit#gid=801945814"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -420,
+        -120
+      ],
+      "id": "85dd0e9f-b415-4907-917a-9c02ddc5fd82",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "raSFYcO9RPTRcCzd",
+          "name": "Sheet_atom"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "={{ $json.locale === 'en' ? 'We received your message' : 'Hemos recibido tu mensaje' }}",
+        "message": "={{ $json.locale === 'en' ? 'Hi ' + $json.Nombre + ',\\n\\nThanks for contacting ATOM Digital. We have received your message and will get back to you shortly.\\n\\nBest regards,\\nATOM Digital' : 'Hola ' + $json.Nombre + ',\\n\\nGracias por contactar con ATOM Digital. Hemos recibido tu mensaje y nos pondremos en contacto contigo en breve.\\n\\nUn saludo,\\nATOM Digital' }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        -140,
+        -120
+      ],
+      "id": "2a70235e-6819-4e21-9baa-57fb507f50d0",
+      "name": "Send confirmation email",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "hEGCchQfeioUKGOd",
+          "name": "Atom's credentials"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "noData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        120,
+        -120
+      ],
+      "id": "f6394012-b8a9-43f2-91ea-ddcfd1f715b2",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize payload": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send confirmation email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send confirmation email": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "4778059b-f9c4-4b58-bf17-f219af38f998",
+  "meta": {
+    "instanceId": "d8ccc7bb4db5ac76b8a1beef7bd3e8012268afaf49d5a605f134690cdd2af31f"
+  },
+  "id": "Uk4Urn9HgQFqmwq0",
+  "tags": []
+}

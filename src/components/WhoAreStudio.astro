@@ -1,0 +1,250 @@
+---
+import StudioPageNav from "./StudioPageNav";
+import type { Locale } from "../lib/site-locale";
+
+const { locale = "es" } = Astro.props as { locale?: Locale };
+
+const content = {
+  es: {
+    heroLabel: "QUIÉNES SOMOS",
+    heroTitle: "Recuperamos oportunidades que tu negocio pierde cada día",
+    heroBody:
+      "Ayudamos a restaurantes y pequeñas empresas a no perder reservas, ventas o conversaciones valiosas cuando no pueden contestar a tiempo.",
+    heroStats: [
+      { value: "24/7", label: "Respuesta automática" },
+      { value: "1 contacto", label: "1 oportunidad recuperable" },
+      { value: "0 excusas", label: "Para perder una venta" },
+    ],
+    introLabel: "EL PROBLEMA",
+    introTitle: "Lo que pasa todos los días y casi nadie mide",
+    introParagraphs: [
+      "En muchos negocios, especialmente restaurantes y pequeñas empresas, hay algo que pasa todos los días y casi nadie se da cuenta de cuánto dinero cuesta: llamadas que no se pueden atender, mensajes que quedan sin responder y clientes que terminan reservando o comprando en otro sitio.",
+      "La mayoría de los dueños están ocupados gestionando el negocio, atendiendo clientes, coordinando al equipo y resolviendo problemas del día a día. El seguimiento de llamadas o de contactos muchas veces queda en segundo plano, y ahí es donde se pierden oportunidades reales de venta.",
+    ],
+    painPoints: [
+      {
+        title: "Llamadas perdidas",
+        body: "Cuando no puedes coger el teléfono, muchas veces el cliente no vuelve a intentarlo.",
+      },
+      {
+        title: "Mensajes sin respuesta",
+        body: "Cada consulta no atendida a tiempo abre la puerta a que la venta acabe en otro negocio.",
+      },
+      {
+        title: "Seguimiento inexistente",
+        body: "Sin un sistema, el día a día se come los contactos y se escapan oportunidades reales.",
+      },
+    ],
+    solutionLabel: "LA SOLUCIÓN",
+    solutionTitle: "Por eso creé este servicio",
+    solutionParagraphs: [
+      "Mi objetivo es ayudar a negocios que reciben contactos de clientes, pero que no siempre pueden responder a tiempo, a recuperar esas oportunidades antes de que se pierdan.",
+      "Lo hago implementando sistemas simples que detectan llamadas o consultas no atendidas y responden automáticamente para convertirlas en reservas o en conversaciones con el negocio.",
+      "La idea es sencilla: si un cliente intentó contactar contigo, no deberías perder esa venta solo porque en ese momento estabas ocupado atendiendo el negocio.",
+    ],
+    foundersLabel: "FUNDADORES",
+    foundersTitle: "Las personas detrás de ATOM",
+    founders: [
+      {
+        name: "Zeki",
+        role: "Co-founder",
+        image: "/zeki.png",
+        body: "Construye sistemas que convierten contactos perdidos en conversaciones reales para el negocio.",
+      },
+      {
+        name: "Nate",
+        role: "Co-founder",
+        image: "/nate.png",
+        body: "Se enfoca en crear procesos simples, útiles y fáciles de implantar para pequeñas empresas.",
+      },
+    ],
+    ctaLabel: "NUESTRA MISIÓN",
+    ctaTitle: "Que ningún cliente interesado se quede sin respuesta",
+    ctaBody:
+      "Diseñamos automatizaciones pensadas para negocios reales, con problemas reales y con necesidad de resultados rápidos.",
+    ctaButton: "Ver precios",
+    footer: "© 2026 ATOM. Todos los derechos reservados.",
+  },
+  en: {
+    heroLabel: "WHO WE ARE",
+    heroTitle: "We recover opportunities your business loses every day",
+    heroBody:
+      "We help restaurants and small businesses stop losing bookings, sales, and valuable conversations when they cannot reply in time.",
+    heroStats: [
+      { value: "24/7", label: "Automatic response" },
+      { value: "1 contact", label: "1 recoverable opportunity" },
+      { value: "0 excuses", label: "To lose a sale" },
+    ],
+    introLabel: "THE PROBLEM",
+    introTitle: "What happens every day and almost nobody measures",
+    introParagraphs: [
+      "In many businesses, especially restaurants and small companies, something happens every day and almost nobody notices how much money it costs: calls that go unanswered, messages left without a reply, and customers who end up booking or buying somewhere else.",
+      "Most owners are busy running the business, serving customers, coordinating the team, and solving day-to-day problems. Following up on calls or inquiries often becomes secondary, and that is exactly where real sales opportunities get lost.",
+    ],
+    painPoints: [
+      {
+        title: "Missed calls",
+        body: "When you cannot answer the phone, many customers will not try a second time.",
+      },
+      {
+        title: "Unanswered messages",
+        body: "Every inquiry left hanging gives the sale a chance to end up with another business.",
+      },
+      {
+        title: "No follow-up system",
+        body: "Without a system, the day-to-day takes over and valuable leads quietly disappear.",
+      },
+    ],
+    solutionLabel: "THE SOLUTION",
+    solutionTitle: "That is why I created this service",
+    solutionParagraphs: [
+      "My goal is to help businesses that receive customer inquiries, but cannot always respond in time, recover those opportunities before they disappear.",
+      "I do it by implementing simple systems that detect missed calls or unanswered inquiries and respond automatically to turn them into bookings or real conversations with the business.",
+      "The idea is simple: if a customer tried to contact you, you should not lose that sale just because you were busy running the business at that moment.",
+    ],
+    foundersLabel: "FOUNDERS",
+    foundersTitle: "The people behind ATOM",
+    founders: [
+      {
+        name: "Zeki",
+        role: "Co-founder",
+        image: "/zeki.png",
+        body: "Builds systems that turn missed contacts into real conversations for the business.",
+      },
+      {
+        name: "Nate",
+        role: "Co-founder",
+        image: "/nate.png",
+        body: "Focuses on creating simple, useful, and easy-to-implement processes for small businesses.",
+      },
+    ],
+    ctaLabel: "OUR MISSION",
+    ctaTitle: "No interested customer should go unanswered",
+    ctaBody:
+      "We design automations for real businesses, with real problems and a need for fast results.",
+    ctaButton: "View pricing",
+    footer: "© 2026 ATOM. All rights reserved.",
+  },
+} as const;
+
+const copy = content[locale];
+const pricingHref = locale === "en" ? "/en/pricing" : "/pricing";
+---
+
+<main class="features-page whoare-page">
+  <section class="hero section">
+    <div class="aurora aurora-main" aria-hidden="true"></div>
+    <div class="container">
+      <StudioPageNav active="whoare" locale={locale} />
+
+      <div class="whoare-hero-grid">
+        <div class="whoare-hero-copy">
+          <p class="label">{copy.heroLabel}</p>
+          <h2>{copy.heroTitle}</h2>
+          <p class="body-lg limited">{copy.heroBody}</p>
+        </div>
+
+        <div class="whoare-hero-stats">
+          {copy.heroStats.map((stat) => (
+            <article class="hero-metric-card">
+              <p class="value">{stat.value}</p>
+              <p class="meta">{stat.label}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="aurora aurora-subtle" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head about-head">
+        <div>
+          <p class="label">{copy.introLabel}</p>
+          <h2>{copy.introTitle}</h2>
+        </div>
+      </div>
+
+      <div class="whoare-story-grid">
+        <div class="whoare-story-copy">
+          {copy.introParagraphs.map((paragraph) => (
+            <p class="body-lg">{paragraph}</p>
+          ))}
+        </div>
+
+        <div class="whoare-pain-grid">
+          {copy.painPoints.map((item) => (
+            <article class="feature-card whoare-pain-card">
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="aurora aurora-main soft" aria-hidden="true"></div>
+    <div class="container">
+      <p class="label">{copy.solutionLabel}</p>
+      <h2>{copy.solutionTitle}</h2>
+
+      <div class="whoare-solution-panel">
+        {copy.solutionParagraphs.map((paragraph) => (
+          <p class="body-lg">{paragraph}</p>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="aurora aurora-subtle" aria-hidden="true"></div>
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="label">{copy.foundersLabel}</p>
+          <h2>{copy.foundersTitle}</h2>
+        </div>
+      </div>
+
+      <div class="whoare-founders-grid">
+        {copy.founders.map((founder) => (
+          <article class="feature-card founder-card">
+            <img src={founder.image} alt={founder.name} class="founder-photo" />
+            <h3>{founder.name}</h3>
+            <p class="founder-role">{founder.role}</p>
+            <p>{founder.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="aurora aurora-main soft" aria-hidden="true"></div>
+    <div class="container">
+      <div class="cta-band">
+        <div>
+          <p class="label">{copy.ctaLabel}</p>
+          <h2>{copy.ctaTitle}</h2>
+          <p class="body-lg limited">{copy.ctaBody}</p>
+        </div>
+
+        <div class="cta-actions">
+          <a class="plan-btn plan-btn-popular cta-link" href={pricingHref}>{copy.ctaButton}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <div class="foot-brand">
+        <img src="/ATOM.svg" alt="ATOM" class="foot-wordmark" />
+      </div>
+      <p>{copy.footer}</p>
+    </div>
+  </footer>
+</main>

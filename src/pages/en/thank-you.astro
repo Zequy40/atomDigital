@@ -1,0 +1,25 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import "../../styles/features-studio.css";
+---
+
+<Layout title="Thank You | ATOM Digital" lang="en">
+  <main class="features-page thank-you-page">
+    <section class="section">
+      <div class="aurora aurora-main" aria-hidden="true"></div>
+      <div class="container contact-wrap">
+        <p class="label centered">MESSAGE SENT</p>
+        <h2 class="centered">Thank you</h2>
+        <p class="body-lg centered contact-copy">
+          Your email has been sent successfully. We will contact you shortly.
+        </p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<script is:inline>
+  setTimeout(() => {
+    window.location.assign("/en/features");
+  }, 2000);
+</script>

@@ -1,430 +1,510 @@
 ---
-import Layout from '../layouts/Layout.astro';
-// Homepage.astro
+import { getLocalizedPath, type Locale } from "../lib/site-locale";
+
+const { locale = "es" } = Astro.props as { locale?: Locale };
+
+const content = {
+  es: {
+    hint: "⟵ O pulse aquí para más opciones",
+    nav: {
+      features: "Características",
+      pricing: "Precios",
+      whoare: "Quiénes somos",
+    },
+    discover: "Descubre más",
+    messages: {
+      first: "Hola soy Atom, estoy aquí para que recuperes ventas\ncada semana.",
+      second:
+        "Deja de perder oportunidades por falta de seguimiento: convierto tus contactos en citas y clientes con un proceso claro que funciona aunque tú estés ocupado.",
+      third: "Descubre más pulsando el botón siguiente.",
+    },
+  },
+  en: {
+    hint: "⟵ Or click here for more options",
+    nav: {
+      features: "Features",
+      pricing: "Pricing",
+      whoare: "Who are",
+    },
+    discover: "Discover more",
+    messages: {
+      first: "Hi, I'm Atom. I'm here to help you recover sales\nevery single week.",
+      second:
+        "Stop losing opportunities because of poor follow-up: I turn your leads into meetings and customers with a clear process that works even when you're busy.",
+      third: "Discover more by clicking the next button.",
+    },
+  },
+} as const;
+
+const copy = content[locale];
 ---
-<Layout>
 <div class="container">
-        <!-- Red neuronal de fondo -->
-        <div class="neural-background">
-            <!-- Nodos lado izquierdo -->
-            <div class="node" style="top: 10%; left: 15%;"></div>
-            <div class="node" style="top: 25%; left: 8%;"></div>
-            <div class="node" style="top: 40%; left: 20%;"></div>
-            <div class="node" style="top: 60%; left: 12%;"></div>
-            <div class="node" style="top: 75%; left: 18%;"></div>
-            <div class="node" style="top: 85%; left: 25%;"></div>
-            <div class="node" style="top: 18%; left: 5%;"></div>
-            <div class="node" style="top: 50%; left: 15%;"></div>
-            <div class="node" style="top: 68%; left: 22%;"></div>
-            <div class="node" style="top: 35%; left: 10%;"></div>
-            
-            <!-- Nodos lado derecho -->
-            <div class="node" style="top: 12%; right: 20%;"></div>
-            <div class="node" style="top: 30%; right: 15%;"></div>
-            <div class="node" style="top: 45%; right: 8%;"></div>
-            <div class="node" style="top: 55%; right: 22%;"></div>
-            <div class="node" style="top: 70%; right: 10%;"></div>
-            <div class="node" style="top: 88%; right: 18%;"></div>
-            <div class="node" style="top: 20%; right: 12%;"></div>
-            <div class="node" style="top: 62%; right: 25%;"></div>
-            <div class="node" style="top: 78%; right: 15%;"></div>
-            <div class="node" style="top: 38%; right: 18%;"></div>
-            
-            <!-- Nodos centrales -->
-            <div class="node" style="top: 8%; left: 50%;"></div>
-            <div class="node" style="bottom: 15%; left: 45%;"></div>
-            <div class="node" style="top: 28%; left: 48%;"></div>
-            <div class="node" style="top: 72%; left: 52%;"></div>
-            <div class="node" style="top: 15%; left: 42%;"></div>
-            <div class="node" style="bottom: 25%; left: 55%;"></div>
-            
-            <!-- Conexiones lado izquierdo -->
-            <div class="connection" style="top: 10%; left: 15%; width: 150px; transform: rotate(45deg);"></div>
-            <div class="connection" style="top: 25%; left: 8%; width: 180px; transform: rotate(-30deg);"></div>
-            <div class="connection" style="top: 40%; left: 20%; width: 200px; transform: rotate(15deg);"></div>
-            <div class="connection" style="top: 18%; left: 5%; width: 160px; transform: rotate(60deg);"></div>
-            <div class="connection" style="top: 60%; left: 12%; width: 140px; transform: rotate(-45deg);"></div>
-            <div class="connection" style="top: 35%; left: 10%; width: 170px; transform: rotate(25deg);"></div>
-            <div class="connection" style="top: 75%; left: 18%; width: 130px; transform: rotate(-20deg);"></div>
-            
-            <!-- Conexiones lado derecho -->
-            <div class="connection" style="top: 12%; right: 20%; width: 120px; transform: rotate(-60deg);"></div>
-            <div class="connection" style="top: 45%; right: 8%; width: 160px; transform: rotate(120deg);"></div>
-            <div class="connection" style="top: 30%; right: 15%; width: 145px; transform: rotate(-40deg);"></div>
-            <div class="connection" style="top: 70%; right: 10%; width: 155px; transform: rotate(35deg);"></div>
-            <div class="connection" style="top: 55%; right: 22%; width: 135px; transform: rotate(-75deg);"></div>
-            <div class="connection" style="top: 38%; right: 18%; width: 125px; transform: rotate(50deg);"></div>
-            
-            <!-- Conexiones centrales -->
-            <div class="connection" style="top: 8%; left: 50%; width: 200px; transform: rotate(-15deg);"></div>
-            <div class="connection" style="top: 28%; left: 48%; width: 180px; transform: rotate(30deg);"></div>
-            <div class="connection" style="bottom: 15%; left: 45%; width: 190px; transform: rotate(-50deg);"></div>
-            <div class="connection" style="top: 72%; left: 52%; width: 165px; transform: rotate(70deg);"></div>
-        </div>
-        
-        <div class="glass-panel">
-            <!-- Logo en esquina superior izquierda -->
-            <div class="logo-container" id="logoButton">
-                <img src="/atom-logo.png" alt="ATOM Logo">
-            </div>
-            <div class="logo-hint" id="logoHint" aria-hidden="true">⟵ O pulse aquí para más opciones</div>
+  <div class="neural-background">
+    <div class="node" style="top: 10%; left: 15%;"></div>
+    <div class="node" style="top: 25%; left: 8%;"></div>
+    <div class="node" style="top: 40%; left: 20%;"></div>
+    <div class="node" style="top: 60%; left: 12%;"></div>
+    <div class="node" style="top: 75%; left: 18%;"></div>
+    <div class="node" style="top: 85%; left: 25%;"></div>
+    <div class="node" style="top: 18%; left: 5%;"></div>
+    <div class="node" style="top: 50%; left: 15%;"></div>
+    <div class="node" style="top: 68%; left: 22%;"></div>
+    <div class="node" style="top: 35%; left: 10%;"></div>
 
-            <!-- Menú de navegación -->
-            <nav class="nav-menu" id="navMenu">
-                <a href="/features">Features</a>
-                <a href="/pricing">Pricing</a>
-            </nav>
+    <div class="node" style="top: 12%; right: 20%;"></div>
+    <div class="node" style="top: 30%; right: 15%;"></div>
+    <div class="node" style="top: 45%; right: 8%;"></div>
+    <div class="node" style="top: 55%; right: 22%;"></div>
+    <div class="node" style="top: 70%; right: 10%;"></div>
+    <div class="node" style="top: 88%; right: 18%;"></div>
+    <div class="node" style="top: 20%; right: 12%;"></div>
+    <div class="node" style="top: 62%; right: 25%;"></div>
+    <div class="node" style="top: 78%; right: 15%;"></div>
+    <div class="node" style="top: 38%; right: 18%;"></div>
 
-            <section class="voice-stage" aria-label="Robot speaking area">
-                <div class="waves-container" aria-hidden="true">
-                    <svg viewBox="0 0 1200 140" preserveAspectRatio="none">
-                        <path id="wave1" class="wave-line wave1" d=""></path>
-                        <path id="wave2" class="wave-line wave2" d=""></path>
-                        <path id="wave3" class="wave-line wave3" d=""></path>
-                        <path id="wave4" class="wave-line wave4" d=""></path>
-                        <path id="wave5" class="wave-line wave5" d=""></path>
-                    </svg>
-                </div>
-                <p class="voice-text" id="robotSpeechText"></p>
-                <p class="voice-text voice-text-secondary" id="robotSpeechTextSecondary"></p>
-                <a class="discover-button" id="discoverButton" href="/features">Descubre más</a>
-            </section>
+    <div class="node" style="top: 8%; left: 50%;"></div>
+    <div class="node" style="bottom: 15%; left: 45%;"></div>
+    <div class="node" style="top: 28%; left: 48%;"></div>
+    <div class="node" style="top: 72%; left: 52%;"></div>
+    <div class="node" style="top: 15%; left: 42%;"></div>
+    <div class="node" style="bottom: 25%; left: 55%;"></div>
 
-            <!-- Efecto ATOM en la esquina inferior derecha -->
+    <div class="connection" style="top: 10%; left: 15%; width: 150px; transform: rotate(45deg);"></div>
+    <div class="connection" style="top: 25%; left: 8%; width: 180px; transform: rotate(-30deg);"></div>
+    <div class="connection" style="top: 40%; left: 20%; width: 200px; transform: rotate(15deg);"></div>
+    <div class="connection" style="top: 18%; left: 5%; width: 160px; transform: rotate(60deg);"></div>
+    <div class="connection" style="top: 60%; left: 12%; width: 140px; transform: rotate(-45deg);"></div>
+    <div class="connection" style="top: 35%; left: 10%; width: 170px; transform: rotate(25deg);"></div>
+    <div class="connection" style="top: 75%; left: 18%; width: 130px; transform: rotate(-20deg);"></div>
 
-        </div>
+    <div class="connection" style="top: 12%; right: 20%; width: 120px; transform: rotate(-60deg);"></div>
+    <div class="connection" style="top: 45%; right: 8%; width: 160px; transform: rotate(120deg);"></div>
+    <div class="connection" style="top: 30%; right: 15%; width: 145px; transform: rotate(-40deg);"></div>
+    <div class="connection" style="top: 70%; right: 10%; width: 155px; transform: rotate(35deg);"></div>
+    <div class="connection" style="top: 55%; right: 22%; width: 135px; transform: rotate(-75deg);"></div>
+    <div class="connection" style="top: 38%; right: 18%; width: 125px; transform: rotate(50deg);"></div>
+
+    <div class="connection" style="top: 8%; left: 50%; width: 200px; transform: rotate(-15deg);"></div>
+    <div class="connection" style="top: 28%; left: 48%; width: 180px; transform: rotate(30deg);"></div>
+    <div class="connection" style="bottom: 15%; left: 45%; width: 190px; transform: rotate(-50deg);"></div>
+    <div class="connection" style="top: 72%; left: 52%; width: 165px; transform: rotate(70deg);"></div>
+  </div>
+
+  <div class="glass-panel">
+    <div class="logo-container" id="logoButton">
+      <img src="/atom-logo.png" alt="ATOM Logo" />
     </div>
-    </Layout>
+    <div class="logo-hint" id="logoHint" aria-hidden="true">{copy.hint}</div>
+
+    <div class="locale-switch" aria-label="Language switcher">
+      <a class:list={["locale-link", locale === "es" && "active"]} href={getLocalizedPath("es", "home")}>ES</a>
+      <a class:list={["locale-link", locale === "en" && "active"]} href={getLocalizedPath("en", "home")}>EN</a>
+    </div>
+
+    <nav class="nav-menu" id="navMenu">
+      <a href={getLocalizedPath(locale, "features")}>{copy.nav.features}</a>
+      <a href={getLocalizedPath(locale, "pricing")}>{copy.nav.pricing}</a>
+      <a href={getLocalizedPath(locale, "whoare")}>{copy.nav.whoare}</a>
+    </nav>
+
+    <section class="voice-stage" aria-label="Robot speaking area">
+      <div class="waves-container" aria-hidden="true">
+        <svg viewBox="0 0 1200 140" preserveAspectRatio="none">
+          <path id="wave1" class="wave-line wave1" d=""></path>
+          <path id="wave2" class="wave-line wave2" d=""></path>
+          <path id="wave3" class="wave-line wave3" d=""></path>
+          <path id="wave4" class="wave-line wave4" d=""></path>
+          <path id="wave5" class="wave-line wave5" d=""></path>
+        </svg>
+      </div>
+      <p class="voice-text" id="robotSpeechText"></p>
+      <p class="voice-text voice-text-secondary" id="robotSpeechTextSecondary"></p>
+      <a class="discover-button" id="discoverButton" href={getLocalizedPath(locale, "features")}>{copy.discover}</a>
+    </section>
+  </div>
+</div>
+
 <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-        body {
-            font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0a0a0a;
-            color: white;
-            overflow: hidden;
-        }
+  body {
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #0a0a0a;
+    color: white;
+    overflow: hidden;
+  }
 
-        .container {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #0a0a0a;
-        }
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a0a;
+  }
 
-        /* Red neuronal de fondo */
-        .neural-background {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
+  .neural-background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
 
-        .node {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #8900B0;
-            border-radius: 50%;
-            box-shadow: 0 0 15px #8900B0;
-            animation: pulse 2s ease-in-out infinite;
-        }
+  .node {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #8900b0;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #8900b0;
+    animation: pulse 2s ease-in-out infinite;
+  }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.7; }
-        }
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.7;
+    }
+  }
 
-        .connection {
-            position: absolute;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #8900B0, transparent);
-            transform-origin: left center;
-            opacity: 0.4;
-        }
+  .connection {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #8900b0, transparent);
+    transform-origin: left center;
+    opacity: 0.4;
+  }
 
-        /* Panel de cristal 3D */
-        .glass-panel {
-            position: relative;
-            width: 85%;
-            max-width: 1400px;
-            height: 75vh;
-            background: rgba(40, 40, 40, 0.3);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 
-                0 20px 60px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            transform: perspective(1200px) rotateY(-15deg) rotateX(5deg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+  .glass-panel {
+    position: relative;
+    width: 85%;
+    max-width: 1400px;
+    height: 75vh;
+    background: rgb(40 40 40 / 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    border-radius: 20px;
+    box-shadow:
+      0 20px 60px rgb(0 0 0 / 0.5),
+      inset 0 1px 0 rgb(255 255 255 / 0.1);
+    overflow: hidden;
+    transform: perspective(1200px) rotateY(-15deg) rotateX(5deg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-        /* Logo en la esquina superior izquierda */
-        .logo-container {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            z-index: 30;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+  .logo-container {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 30;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
 
-        .logo-container:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 20px rgba(137, 0, 176, 0.6));
-        }
+  .logo-container:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 20px rgb(137 0 176 / 0.6));
+  }
 
-        .logo-container img {
-            width: 80px;
-            height: auto;
-            display: block;
-        }
+  .logo-container img {
+    width: 80px;
+    height: auto;
+    display: block;
+  }
 
-        .logo-hint {
-            position: absolute;
-            top: 70px;
-            left: 120px;
-            transform: translateY(-50%);
-            z-index: 30;
-            color: #f2e7ff;
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
-            letter-spacing: 0.01em;
-            opacity: 0;
-            transition: opacity 0.35s ease;
-        }
+  .logo-hint {
+    position: absolute;
+    top: 70px;
+    left: 120px;
+    transform: translateY(-50%);
+    z-index: 30;
+    color: #f2e7ff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-shadow: 0 4px 16px rgb(0 0 0 / 0.55);
+    letter-spacing: 0.01em;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
 
-        .logo-hint.visible {
-            opacity: 1;
-        }
+  .logo-hint.visible {
+    opacity: 1;
+  }
 
-        /* Menú de navegación */
-        .nav-menu {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 40px;
-            z-index: 30;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-        }
+  .locale-switch {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 30;
+    display: flex;
+    gap: 8px;
+  }
 
-        .nav-menu.active {
-            opacity: 1;
-            pointer-events: all;
-        }
+  .locale-link {
+    min-height: 38px;
+    padding: 0 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(137 0 176 / 0.5);
+    border-radius: 999px;
+    background: rgb(0 0 0 / 0.5);
+    color: #e9e9e9;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    transition: all 0.25s ease;
+  }
 
-        .nav-menu a {
-            color: #E9E9E9;
-            text-decoration: none;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 10px 25px;
-            border: 1px solid rgba(137, 0, 176, 0.5);
-            border-radius: 8px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
+  .locale-link.active,
+  .locale-link:hover {
+    border-color: #ce9fff;
+    box-shadow: 0 0 20px rgb(137 0 176 / 0.25);
+  }
 
-        .nav-menu a::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(137, 0, 176, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
+  .nav-menu {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 20px;
+    z-index: 30;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 
-        .nav-menu a:hover::before {
-            left: 100%;
-        }
+  .nav-menu.active {
+    opacity: 1;
+    pointer-events: all;
+  }
 
-        .nav-menu a:hover {
-            border-color: #8900B0;
-            box-shadow: 0 0 20px rgba(137, 0, 176, 0.4);
-            transform: translateY(-2px);
-        }
+  .nav-menu a {
+    color: #e9e9e9;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 25px;
+    border: 1px solid rgb(137 0 176 / 0.5);
+    border-radius: 8px;
+    background: rgb(0 0 0 / 0.5);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-        .voice-stage {
-            position: absolute;
-            left: 5%;
-            right: 5%;
-            top: 50%;
-            transform: translateY(-40%);
-            z-index: 22;
-            display: grid;
-            justify-items: center;
-            gap: 10px;
-            pointer-events: none;
-        }
+  .nav-menu a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgb(137 0 176 / 0.3), transparent);
+    transition: left 0.5s ease;
+  }
 
-        .waves-container {
-            width: min(92%, 1180px);
-            height: 180px;
-            z-index: 1;
-            position: relative;
-            opacity: 0.95;
-            grid-column: 1;
-            grid-row: 1;
-            align-self: center;
-        }
+  .nav-menu a:hover::before {
+    left: 100%;
+  }
 
-        .waves-container svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
+  .nav-menu a:hover {
+    border-color: #8900b0;
+    box-shadow: 0 0 20px rgb(137 0 176 / 0.4);
+    transform: translateY(-2px);
+  }
 
-        .wave-line {
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            filter: drop-shadow(0 0 8px rgba(184, 112, 255, 0.22));
-        }
+  .voice-stage {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-40%);
+    z-index: 22;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
+    pointer-events: none;
+  }
 
-        .wave1 { stroke: #8900B0; stroke-width: 3.2; opacity: 0.35; }
-        .wave2 { stroke: #a855f7; stroke-width: 2.6; opacity: 0.46; }
-        .wave3 { stroke: #8900B0; stroke-width: 3.8; opacity: 0.62; }
-        .wave4 { stroke: #c084fc; stroke-width: 2.1; opacity: 0.5; }
-        .wave5 { stroke: #d946ef; stroke-width: 3.3; opacity: 0.58; }
+  .waves-container {
+    width: min(92%, 1180px);
+    height: 180px;
+    z-index: 1;
+    position: relative;
+    opacity: 0.95;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+  }
 
-        .voice-stage.speaking .wave-line {
-            filter: drop-shadow(0 0 11px rgba(200, 136, 255, 0.35));
-        }
+  .waves-container svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
 
-        .voice-text {
-            margin: 10px 0 0;
-            min-height: 44px;
-            max-width: min(78%, 920px);
-            text-align: center;
-            white-space: pre-line;
-            color: #f2e7ff;
-            font-size: clamp(1rem, 1.65vw, 1.33rem);
-            font-weight: 500;
-            line-height: 1.45;
-            text-shadow: 0 4px 22px rgba(0, 0, 0, 0.45);
-        }
+  .wave-line {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    filter: drop-shadow(0 0 8px rgb(184 112 255 / 0.22));
+  }
 
-        .voice-text-secondary {
-            display: none;
-            min-height: 0;
-            font-size: clamp(0.95rem, 1.35vw, 1.12rem);
-            color: #f6ecff;
-        }
+  .wave1 { stroke: #8900b0; stroke-width: 3.2; opacity: 0.35; }
+  .wave2 { stroke: #a855f7; stroke-width: 2.6; opacity: 0.46; }
+  .wave3 { stroke: #8900b0; stroke-width: 3.8; opacity: 0.62; }
+  .wave4 { stroke: #c084fc; stroke-width: 2.1; opacity: 0.5; }
+  .wave5 { stroke: #d946ef; stroke-width: 3.3; opacity: 0.58; }
 
-        .voice-text-secondary.visible {
-            display: block;
-            min-height: 30px;
-        }
+  .voice-stage.speaking .wave-line {
+    filter: drop-shadow(0 0 11px rgb(200 136 255 / 0.35));
+  }
 
-        .voice-text.caret-active::after {
-            content: "";
-            display: inline-block;
-            width: 2px;
-            height: 1.05em;
-            margin-left: 4px;
-            background: #ce9fff;
-            vertical-align: text-bottom;
-            animation: caretBlink 0.8s step-end infinite;
-        }
+  .voice-text {
+    margin: 10px 0 0;
+    min-height: 44px;
+    max-width: min(78%, 920px);
+    text-align: center;
+    white-space: pre-line;
+    color: #f2e7ff;
+    font-size: clamp(1rem, 1.65vw, 1.33rem);
+    font-weight: 500;
+    line-height: 1.45;
+    text-shadow: 0 4px 22px rgb(0 0 0 / 0.45);
+  }
 
-        .discover-button {
-            margin-top: 14px;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 11px 22px;
-            border-radius: 10px;
-            border: 1px solid rgba(137, 0, 176, 0.72);
-            background: rgba(17, 10, 22, 0.72);
-            color: #f5ebff;
-            text-decoration: none;
-            font-size: 0.97rem;
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-            pointer-events: auto;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-            pointer-events: none;
-        }
+  .voice-text-secondary {
+    display: none;
+    min-height: 0;
+    font-size: clamp(0.95rem, 1.35vw, 1.12rem);
+    color: #f6ecff;
+  }
 
-        .discover-button:hover {
-            transform: translateY(-2px);
-            border-color: #ce9fff;
-            box-shadow: 0 14px 28px rgba(100, 35, 135, 0.45);
-        }
+  .voice-text-secondary.visible {
+    display: block;
+    min-height: 30px;
+  }
 
-        .discover-button.visible {
-            display: inline-flex;
-            pointer-events: auto;
-        }
+  .voice-text.caret-active::after {
+    content: "";
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    margin-left: 4px;
+    background: #ce9fff;
+    vertical-align: text-bottom;
+    animation: caretBlink 0.8s step-end infinite;
+  }
 
-        @keyframes caretBlink {
-            0%, 45% { opacity: 1; }
-            46%, 100% { opacity: 0; }
-        }
+  .discover-button {
+    margin-top: 14px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 11px 22px;
+    border-radius: 10px;
+    border: 1px solid rgb(137 0 176 / 0.72);
+    background: rgb(17 10 22 / 0.72);
+    color: #f5ebff;
+    text-decoration: none;
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 24px rgb(0 0 0 / 0.35);
+    pointer-events: auto;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    pointer-events: none;
+  }
 
-        @media (max-width: 900px) {
-            .glass-panel {
-                transform: none;
-                width: 92%;
-                height: 82vh;
-            }
+  .discover-button:hover {
+    transform: translateY(-2px);
+    border-color: #ce9fff;
+    box-shadow: 0 14px 28px rgb(100 35 135 / 0.45);
+  }
 
-            .voice-stage {
-                left: 16px;
-                right: 16px;
-                transform: translateY(-34%);
-                gap: 8px;
-            }
+  .discover-button.visible {
+    display: inline-flex;
+    pointer-events: auto;
+  }
 
-            .logo-hint {
-                top: 58px;
-                left: 118px;
-                font-size: 0.8rem;
-                max-width: 58vw;
-            }
+  @keyframes caretBlink {
+    0%,
+    45% { opacity: 1; }
+    46%,
+    100% { opacity: 0; }
+  }
 
-            .waves-container {
-                width: 100%;
-                height: 120px;
-            }
+  @media (max-width: 900px) {
+    .glass-panel {
+      transform: none;
+      width: 92%;
+      height: 82vh;
+    }
 
-            .voice-text {
-                min-height: 42px;
-                max-width: 96%;
-            }
+    .voice-stage {
+      left: 16px;
+      right: 16px;
+      transform: translateY(-34%);
+      gap: 8px;
+    }
 
-            .voice-text-secondary {
-                min-height: 0;
-            }
+    .locale-switch {
+      top: 18px;
+      right: 18px;
+    }
 
-            .voice-text-secondary.visible {
-                min-height: 28px;
-            }
-        }
-    </style>
+    .logo-hint {
+      top: 58px;
+      left: 118px;
+      font-size: 0.8rem;
+      max-width: 58vw;
+    }
 
-<script is:inline>
+    .waves-container {
+      width: 100%;
+      height: 120px;
+    }
+
+    .voice-text {
+      min-height: 42px;
+      max-width: 96%;
+    }
+
+    .voice-text-secondary {
+      min-height: 0;
+    }
+
+    .voice-text-secondary.visible {
+      min-height: 28px;
+    }
+  }
+</style>
+
+<script
+  is:inline
+  define:vars={{
+    firstMessage: copy.messages.first,
+    secondMessage: copy.messages.second,
+    thirdMessage: copy.messages.third,
+  }}
+>
   document.addEventListener("DOMContentLoaded", () => {
     const logoButton = document.getElementById("logoButton");
     const navMenu = document.getElementById("navMenu");
@@ -439,16 +519,14 @@ import Layout from '../layouts/Layout.astro';
       .filter((node) => node instanceof SVGPathElement);
     let menuOpen = false;
 
-    // Guards: evita null
     if (!(logoButton instanceof HTMLElement) || !(navMenu instanceof HTMLElement)) return;
 
     logoButton.addEventListener("click", (e) => {
-      e.stopPropagation(); // evita que el click burbujee al document y cierre el menú
+      e.stopPropagation();
       menuOpen = !menuOpen;
       navMenu.classList.toggle("active", menuOpen);
     });
 
-    // Cerrar menú al hacer clic fuera
     document.addEventListener("click", (e) => {
       const target = e.target;
       if (!(target instanceof Node)) return;
@@ -475,9 +553,10 @@ import Layout from '../layouts/Layout.astro';
     let speaking = false;
     let destroyed = false;
 
-    const sleep = (ms) => new Promise((resolve) => {
-      window.setTimeout(resolve, ms);
-    });
+    const sleep = (ms) =>
+      new Promise((resolve) => {
+        window.setTimeout(resolve, ms);
+      });
 
     const setSpeaking = (value) => {
       speaking = value;
@@ -513,10 +592,6 @@ import Layout from '../layouts/Layout.astro';
     };
 
     const runMessageSequence = async () => {
-      const firstMessage = "Hola soy Atom, estoy aquí para que recuperes ventas\ncada semana.";
-      const secondMessage = "Deja de perder oportunidades por falta de seguimiento: convierto tus contactos en citas y clientes con un proceso claro que funciona aunque tú estés ocupado.";
-      const thirdMessage = "Descubre más pulsando el boton siguiente.";
-
       await typeMessage(speechText, firstMessage);
       if (destroyed) return;
       await sleep(2000);
